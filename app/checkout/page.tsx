@@ -30,6 +30,14 @@ export default function CheckoutPage() {
         orderPlacedAt: serverTimestamp(), // Firebase will add the current time
       });
       console.log('Order placed with ID: ', docRef.id);
+
+      // Send email notification (move this to server for production)
+      await fetch('/api/send-order-email', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ recipientName, deliveryAddress }),
+      });
+
       router.push('/confirmation'); // Navigate to confirmation page on success
     } catch (e) {
       console.error('Error adding document: ', e);
@@ -39,11 +47,13 @@ export default function CheckoutPage() {
   };
 
   return (
-    <main className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-4">
-      <div className="w-full max-w-lg bg-white rounded-lg shadow-md p-8">
-        <h1 className="text-3xl font-bold text-center mb-6">Finalize Your Delivery</h1>
+    <main className="flex flex-col items-center justify-center min-h-screen bg-brand-red p-4">
+      <div className="w-full max-w-lg bg-white rounded-lg p-8 flex flex-col items-center shadow-lg">
+        <div className='mb-4 h-2 w-20 bg-brand-red rounded-full flex items-center justify-center shadow-lg'></div>
+
+        <h1 className="text-3xl font-bold text-center mb-6 text-red-600">Finalize Your Delivery</h1>
         
-        <div className="bg-gray-100 p-3 rounded-md mb-6 text-center">
+        <div className="bg-gray-200 p-3 rounded-md mb-6 text-center w-full">
           <p className="font-semibold">Order Summary: 1 x Boyfriend V1.0</p>
         </div>
 
@@ -84,7 +94,7 @@ export default function CheckoutPage() {
             </label>
             <input
               type="text"
-              value="August 28, 2025"
+              value="August 29, 2025"
               className="w-full px-3 py-2 border bg-gray-200 text-gray-500 rounded-md"
               disabled
             />
@@ -98,7 +108,7 @@ export default function CheckoutPage() {
           <button
             type="submit"
             disabled={isLoading}
-            className="w-full bg-pink-500 text-white font-bold py-3 px-4 rounded-lg hover:bg-pink-600 transition-colors disabled:bg-pink-300"
+            className="w-full bg-brand-red text-white font-bold py-3 px-4 rounded-lg hover:bg-pink-600 transition-colors disabled:bg-pink-300"
           >
             {isLoading ? 'Placing Order...' : 'Place My Order!'}
           </button>

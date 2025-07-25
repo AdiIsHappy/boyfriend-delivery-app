@@ -7,7 +7,7 @@ import Image from 'next/image';
 // --- Data for our two products ---
 const productData = {
     v1: {
-        name: 'Boyfriend V1.0',
+        name: 'Aditya | Premium Edition | Best Boyfriend Available',
         price: 'One Smile & A Hug',
         stock: 'Only 1 in stock! (And it\'s all yours.)',
         gallery: [
@@ -22,20 +22,20 @@ const productData = {
         audio1: { label: 'Try a Sweet Sample', url: 'https://firebasestorage.googleapis.com/v0/b/boyfriend-delivery.firebasestorage.app/o/Aduio%2FAdi-SweetSample.m4a?alt=media&token=ecfc65f4-671d-411a-8522-352eb1023dda' },
         audio2: { label: 'Hear a Silly Joke', url: 'https://firebasestorage.googleapis.com/v0/b/boyfriend-delivery.firebasestorage.app/o/Aduio%2FAdi-SillyJoke.m4a?alt=media&token=72ac43db-169d-4cb9-87ed-cdb971f7c00f' },
         specs: [
-            { label: 'Height', value: 'Your Height' },
+            { label: 'Priority', value: 'Only you!' },
             { label: 'Cuddle Capacity', value: '100% (Guaranteed)' },
             { label: 'Loyalty', value: 'Unwavering' },
         ],
         reviews: [
-            { author: 'Your Mom', text: 'Best son ever, 10/10 delivery.' },
-            { author: 'Your Pet\'s Name', text: 'He gives the best scratches.' },
-            { author: 'A Fictional Character', text: 'This one has the heart of a true hero.' }
+            { author: 'Mom', text: 'Best son ever, 10/10 delivery.' },
+            { author: 'Sarthak', text: 'Most reliable brother, dont miss the deal' },
+            { author: 'Spiderman', text: 'This one has the heart of a true hero.' }
         ],
         orderButtonText: 'Order Now',
         isOrderable: true,
     },
     v2: {
-        name: 'Boyfriend V2.0',
+        name: 'Dusra Banda | Rogue Edition | The Mysterious Alternative',
         price: 'Your Favorite Hoodie & Control of the TV Remote',
         stock: 'Currently on a secret mission (Unavailable)',
         gallery: [
@@ -67,7 +67,7 @@ function V2UnavailablePopup({ onClose }: { onClose: () => void }) {
     useEffect(() => {
         const timer = setTimeout(() => {
             onClose();
-        }, 4000); // Automatically close and redirect after 4 seconds
+        }, 10000); // Automatically close and redirect after 10 seconds
         return () => clearTimeout(timer);
     }, [onClose]);
 
@@ -79,6 +79,12 @@ function V2UnavailablePopup({ onClose }: { onClose: () => void }) {
                     This product is currently on a secret mission and is unavailable. We have added <strong>Aditya Premium Edition</strong> to your cart instead. Its a free upgrade!
                 </p>
                 <p className="mt-2 text-sm text-gray-500">(Redirecting you to checkout...)</p>
+                <button
+                    onClick={onClose}
+                    className="mt-6 bg-red-500 text-white font-bold py-2 px-4 rounded-lg hover:bg-red-600 transition-colors"
+                >
+                    Close and Redirect
+                </button>
             </div>
         </div>
     );
@@ -114,7 +120,13 @@ export default function ProductPage() {
         if (carouselRef.current) {
             const child = carouselRef.current.children[carouselIndex] as HTMLElement;
             if (child) {
-                child.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+                // Calculate horizontal scroll position
+                const container = carouselRef.current;
+                const left = child.offsetLeft - container.offsetLeft;
+                container.scrollTo({
+                    left,
+                    behavior: 'smooth'
+                });
             }
         }
     }, [carouselIndex]);
@@ -158,10 +170,9 @@ export default function ProductPage() {
     return (
         <>
             {showPopup && <V2UnavailablePopup onClose={handlePopupClose} />}
-            <main className="container mx-auto p-8">
-                <div className="bg-white shadow-xl rounded-lg p-6 md:p-10">
+            <main className="container mx-auto p-8 bg-brand-red">
+                <div className="bg-gray-100 shadow-xl rounded-lg p-6 md:p-10">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-
                         {/* Carousel Gallery */}
                         {product.gallery.length > 0 && (
                             <div
@@ -190,15 +201,14 @@ export default function ProductPage() {
 
                         {/* Product Details */}
                         <div>
-                            <h1 className="text-4xl font-bold text-gray-800">{product.name}</h1>
-                            <p className="text-2xl text-pink-500 mt-2">{product.price}</p>
-                            <p className="text-md text-green-600 font-semibold mt-1">{product.stock}</p>
+                            <h1 className="text-3xl text-brand-red">{product.name}</h1>
+                            <p className="text-md font-bold  mt-2"><span className='font-normal text-black'>Get it only for: </span>{product.price}</p>
 
-                            <div className="mt-6 flex gap-4">
-                                <button onClick={() => audioRef1.current?.play()} className="bg-gray-200 py-2 px-4 rounded-lg hover:bg-gray-300">
+                            <div className="mt-6 flex flex-col gap-4">
+                                <button onClick={() => audioRef1.current?.play()} className="text-white bg-brand-red py-2 px-4 rounded-lg hover:bg-brand-dark">
                                     {product.audio1.label}
                                 </button>
-                                <button onClick={() => audioRef2.current?.play()} className="bg-gray-200 py-2 px-4 rounded-lg hover:bg-gray-300">
+                                <button onClick={() => audioRef2.current?.play()} className="text-white bg-brand-red py-2 px-4 rounded-lg hover:bg-brand-dark">
                                     {product.audio2.label}
                                 </button>
                                 <audio ref={audioRef1} src={product.audio1.url} preload="auto"></audio>
@@ -206,7 +216,7 @@ export default function ProductPage() {
                             </div>
 
                             <div className="mt-8">
-                                <h3 className="text-xl font-semibold border-b pb-2">Technical Specifications</h3>
+                                <h3 className="text-xl font-semibold border-b pb-2">Specifications</h3>
                                 <ul className="mt-4 space-y-2">
                                     {product.specs.map(spec => (
                                         <li key={spec.label}><strong>{spec.label}:</strong> {spec.value}</li>
@@ -214,14 +224,17 @@ export default function ProductPage() {
                                 </ul>
                             </div>
 
-                            <button
+
+                        </div>
+                    </div>
+
+                                                <button
                                 onClick={handleOrderClick}
                                 className="mt-8 w-full bg-green-500 text-white font-bold text-lg py-3 rounded-lg hover:bg-green-600 transition-colors"
                             >
                                 {product.orderButtonText}
                             </button>
-                        </div>
-                    </div>
+                            <p className="text-md text-red-600 font-semibold mt-1">{product.stock}</p>
 
                     {/* Customer Reviews */}
                     <div className="mt-12">
