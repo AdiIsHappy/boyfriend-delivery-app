@@ -2,8 +2,6 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { db } from '../../firebase/config'; // Import the db instance
-import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 
 export default function CheckoutPage() {
   const router = useRouter();
@@ -22,14 +20,14 @@ export default function CheckoutPage() {
     setError('');
 
     try {
-      // Add a new document to the "orders" collection in Firestore
-      const docRef = await addDoc(collection(db, 'orders'), {
-        recipientName: recipientName,
-        deliveryAddress: deliveryAddress,
-        deliveryDate: new Date('2025-08-28T12:00:00'), // August 28, 2025
-        orderPlacedAt: serverTimestamp(), // Firebase will add the current time
-      });
-      console.log('Order placed with ID: ', docRef.id);
+      // // Add a new document to the "orders" collection in Firestore
+      // const docRef = await addDoc(collection(db, 'orders'), {
+      //   recipientName: recipientName,
+      //   deliveryAddress: deliveryAddress,
+      //   deliveryDate: new Date('2025-08-28T12:00:00'), // August 28, 2025
+      //   orderPlacedAt: serverTimestamp(), // Firebase will add the current time
+      // });
+      // console.log('Order placed with ID: ', docRef.id);
       router.push('/confirmation'); // Navigate to confirmation page on success
     } catch (e) {
       console.error('Error adding document: ', e);
