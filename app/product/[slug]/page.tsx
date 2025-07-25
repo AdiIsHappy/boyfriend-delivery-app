@@ -94,7 +94,7 @@ function V2UnavailablePopup({ onClose }: { onClose: () => void }) {
 export default function ProductPage() {
     const router = useRouter();
     const params = useParams();
-    const slug = params.slug as keyof typeof productData;
+    const slug = params!.slug as keyof typeof productData;
     const product = productData[slug];
 
     const [showPopup, setShowPopup] = useState(false);

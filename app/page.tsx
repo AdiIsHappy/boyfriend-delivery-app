@@ -19,7 +19,7 @@ export default function HomePage() {
         <div className="w-full max-w-sm rounded-lg shadow-md text-center relative overflow-hidden transform hover:scale-105 transition-transform" style={{ height: 500 }}>
           <Image
             src="https://firebasestorage.googleapis.com/v0/b/boyfriend-delivery.firebasestorage.app/o/WhatsApp%20Image%202025-07-25%20at%2002.17.13.jpeg?alt=media&token=e97d6463-9961-448b-bacb-e6c7216dc72f"
-            alt="Boyfriend V1.0"
+            alt="Aditya Sahu"
             fill
             className="object-cover"
             priority
@@ -42,7 +42,7 @@ export default function HomePage() {
         <div className="w-full max-w-sm rounded-lg shadow-md text-center relative overflow-hidden transform hover:scale-105 transition-transform" style={{ height: 500 }}>
           <Image
             src="https://firebasestorage.googleapis.com/v0/b/boyfriend-delivery.firebasestorage.app/o/WhatsApp%20Image%202025-07-25%20at%2002.16.52.jpeg?alt=media&token=5e0f6df4-0a52-495e-a9d7-23b660c07695"
-            alt="Boyfriend V2.0"
+            alt="Ghar Wala Banda"
             fill
             className="object-cover"
             priority

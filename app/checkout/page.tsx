@@ -54,7 +54,7 @@ export default function CheckoutPage() {
         <h1 className="text-3xl font-bold text-center mb-6 text-red-600">Finalize Your Delivery</h1>
         
         <div className="bg-gray-200 p-3 rounded-md mb-6 text-center w-full">
-          <p className="font-semibold">Order Summary: 1 x Boyfriend V1.0</p>
+          <p className="font-semibold">Order Summary: 1 x Boyfriend Premium Editions</p>
         </div>
 
         <form onSubmit={handleSubmit}>
