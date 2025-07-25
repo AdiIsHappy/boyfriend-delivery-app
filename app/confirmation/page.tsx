@@ -24,12 +24,12 @@ export default async function ConfirmationPage() {
 
                     <div className="mt-8 flex flex-col sm:flex-row justify-center gap-4">
                         <Link href={instragmUrl} target="_blank" rel="noopener noreferrer">
-                            <button className="w-full sm:w-auto bg-purple-500 text-white font-bold py-3 px-6 rounded-lg hover:bg-green-600 transition-colors">
+                            <button className="w-full sm:w-auto bg-purple-500 text-white font-bold py-3 px-6 rounded-lg hover:bg-purple-600 transition-colors">
                                 Chat and Share Reels on Instagram
                             </button>
                         </Link>
                         <Link href={whatsappUrl} target="_blank" rel="noopener noreferrer">
-                            <button className="w-full sm:w-auto bg-green-500 text-white font-bold py-3 px-6 rounded-lg hover:bg-blue-600 transition-colors">
+                            <button className="w-full sm:w-auto bg-green-500 text-white font-bold py-3 px-6 rounded-lg hover:bg-green-600 transition-colors">
                                 Chat on WhatsApp
                             </button>
                         </Link>
