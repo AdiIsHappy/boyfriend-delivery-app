@@ -30,14 +30,6 @@ export default function CheckoutPage() {
         orderPlacedAt: serverTimestamp(), // Firebase will add the current time
       });
       console.log('Order placed with ID: ', docRef.id);
-
-      // Send email notification (move this to server for production)
-      // await fetch('/api/send-order-email', {
-      //   method: 'POST',
-      //   headers: { 'Content-Type': 'application/json' },
-      //   body: JSON.stringify({ recipientName, deliveryAddress }),
-      // });
-
       router.push('/confirmation'); // Navigate to confirmation page on success
     } catch (e) {
       console.error('Error adding document: ', e);
